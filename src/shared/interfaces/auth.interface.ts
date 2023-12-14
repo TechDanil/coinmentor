@@ -8,9 +8,21 @@ export interface IRegisterRequest {
 
 export interface IRegisterResponse {
     user: IUser;
-    access_token: string;
+    accessToken: string;
 }
 
+export interface ILoginRequest {
+    email: string;
+    password: string;
+}
+
+export interface ILoginRespone {
+    user: IUser;
+    accessToken: string;
+}
+
+export interface IVerifyResponse extends IUser {}
+
 export interface IRefreshResponse {
-    access_token: string;
+    accessToken: string;
 }

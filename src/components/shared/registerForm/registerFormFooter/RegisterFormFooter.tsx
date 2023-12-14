@@ -1,18 +1,17 @@
-import { Link } from "react-router-dom";
+import { memo } from "react";
 import Button from "../../../ui/button/Button";
 
 interface Props {
     isSubmitting: boolean;
 }
 
-const RegisterFormFooter = ({ isSubmitting }: Props) => {
+const RegisterFormFooter = memo(({ isSubmitting }: Props) => {
+
     return (
-        <Button disabled={isSubmitting} className="btn btn-theme btn--icon">
-            <Link to="#">
-                <i className="zwicon-checkmark"></i>
-            </Link>
+        <Button type="submit" disabled={isSubmitting} className="btn btn-theme btn--icon">
+           <i className="zwicon-checkmark"></i>
         </Button>
     );
-}
+});
 
 export default RegisterFormFooter;

@@ -11,8 +11,11 @@ const instance = axios.create({
 instance.interceptors.request.use((config) => {
     const token = getToken();
 
+    console.log(token)
+
     if (config && config.headers && token) {
         config.headers.Authorization = `Bearer ${token}`;
+        console.log(config)
     }
 
     return config;
@@ -32,10 +35,12 @@ instance.interceptors.response.use(
             try {
                 const response = await authService.refresh();
 
-                if (response.status === 200) {
-                    const { access_token } = response.data;
+                console.log(response);
 
-                    saveToken(access_token);
+                if (response.status === 200) {
+                    const { accessToken } = response.data;
+
+                    saveToken(accessToken);
 
                     return instance.request(originalRequest);
                 }

@@ -12,3 +12,7 @@ export interface ITag {
     id: number;
     tag: string;
 } 
+
+export interface INewsResponse {
+    news: INews[];
+}

@@ -1,9 +1,11 @@
-import React from 'react'
+import UserInfo from "./userInfo/UserInfo";
 
 const User = () => {
-  return (
-    <div>User</div>
-  )
+    return (
+        <div className="user">
+            <UserInfo />
+        </div>
+    );
 }
 
-export default User
+export default User;

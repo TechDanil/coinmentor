@@ -1,35 +1,22 @@
 import { ErrorMessage, Field, FormikErrors, FormikTouched } from "formik";
-import License from "../../../ui/license/License";
-import { IInitialValuesRegister } from "../initialValues";
-import RegisterFormFooter from "../registerFormFooter/RegisterFormFooter";
+import LoginFormFooter from "../loginFormFooter/LoginFormFooter";
+import { IInitialValuesLogin } from "../initialValues";
 
 interface Props {
-    values: IInitialValuesRegister;
-    errors: FormikErrors<IInitialValuesRegister>;
-    touched: FormikTouched<IInitialValuesRegister>;
+    values: IInitialValuesLogin;
+    errors: FormikErrors<IInitialValuesLogin>;
+    touched: FormikTouched<IInitialValuesLogin>;
     isSubmitting: boolean;
 }
 
-const RegisterFormBody = ({
+const LoginFormBody = ({  
+    values,
     errors,
     touched,
     isSubmitting,
-    values
 }: Props) => {
     return (
         <div className="login__block__body">
-            <div className="form-group">
-                <Field
-                    id="username"
-                    value={values.username}
-                    type="text"
-                    name="username"
-                    className={`form-control text-center${touched?.username && errors?.username ? " is-invalid" : ""}`}
-                    placeholder="Name"
-                />
-                <ErrorMessage name="username" component="div" className="invalid-feedback" />
-            </div>
-
             <div className="form-group form-group--centered">
                 <Field
                     id="email"
@@ -54,10 +41,9 @@ const RegisterFormBody = ({
                 <ErrorMessage name="password" component="div" className="invalid-feedback" />
             </div>
 
-            <License />
-            <RegisterFormFooter isSubmitting={isSubmitting} />
+            <LoginFormFooter isSubmitting={isSubmitting} />
         </div>
     );
 }
 
-export default RegisterFormBody;
+export default LoginFormBody;

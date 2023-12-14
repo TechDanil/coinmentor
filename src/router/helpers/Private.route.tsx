@@ -1,7 +1,7 @@
 const Private = () => {
-  return (
-    <div>Private.route</div>
-  )
+    return (
+        <div>Private.route</div>
+    )
 }
 
 export default Private;
