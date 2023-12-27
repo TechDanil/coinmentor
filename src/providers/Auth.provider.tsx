@@ -1,18 +1,26 @@
-import { ReactNode, useEffect } from "react";
-import { useActions } from "../hooks/useActions";
+import { ReactNode, useEffect } from 'react'
+import { authService } from '../services/auth.service'
 
 interface Props {
-    children: ReactNode;
+	children: ReactNode
 }
 
 const AuthProvider = ({ children }: Props) => {
-    const { verify } = useActions();
+	useEffect(() => {
+		if (localStorage.getItem('token')) {
+			const checkAuth = async () => {
+				try {
+					await authService.refresh()
+				} catch (error) {
+					throw error
+				}
+			}
 
-    useEffect(() => {
-        verify();
-    }, []);
+			checkAuth()
+		}
+	}, [])
 
-    return <>{children}</>;
+	return <>{children}</>
 }
 
-export default AuthProvider;
+export default AuthProvider

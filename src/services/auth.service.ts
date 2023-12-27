@@ -1,36 +1,43 @@
-import { AxiosResponse } from "axios";
-import { ILoginRequest, ILoginRespone, IRefreshResponse, IRegisterRequest, IRegisterResponse, IVerifyResponse } from "../shared/interfaces/auth.interface";
-import { instance } from "../api/api.interceptor";
+import { AxiosResponse } from 'axios'
+import { instance } from '../api/api.interceptor'
+import {
+	ILoginRequest,
+	ILoginResponse,
+	IRefreshResponse,
+	IRegisterRequest,
+	IRegisterResponse,
+} from '../shared/interfaces/auth.interface'
 
 export const authService = {
-    register: async ({
-        username,
-        email,
-        password,
-    }: IRegisterRequest): Promise<AxiosResponse<IRegisterResponse>> => {
-        const formData = new FormData();
-        formData.append('username', username);
-        formData.append('email', email);
-        formData.append('password', password);
-        console.log(formData)
-        return instance.post<IRegisterResponse>('auth/register', formData, { withCredentials: true });
-    },
+	register: async ({
+		username,
+		email,
+		password,
+	}: IRegisterRequest): Promise<AxiosResponse<IRegisterResponse>> => {
+		return instance.post<IRegisterResponse>(
+			`auth/register`,
+			{ username, email, password },
+			{ withCredentials: true }
+		)
+	},
 
-    login: async ({
-        email,
-        password,
-    }: ILoginRequest): Promise<AxiosResponse<ILoginRespone>> => {
-        return instance.post<ILoginRespone>('auth/login', {
-            email,
-            password,
-        });
-    },
+	login: async ({
+		email,
+		password,
+	}: ILoginRequest): Promise<AxiosResponse<ILoginResponse>> => {
+		return instance.post<ILoginResponse>(`auth/login`, {
+			email,
+			password,
+		})
+	},
 
-    verify: async (): Promise<AxiosResponse<IVerifyResponse>> => {
-        return instance.get<IVerifyResponse>(`auth/verify`)
-    },
+	logout: async (): Promise<AxiosResponse> => {
+		return instance.post<void>('auth/logout')
+	},
 
-    refresh: async (): Promise<AxiosResponse<IRefreshResponse>> => {
-        return instance.get('auth/refresh');
-    }
+	refresh: async (): Promise<AxiosResponse<IRefreshResponse>> => {
+		return instance.get<IRefreshResponse>(`auth/refresh`, {
+			withCredentials: true,
+		})
+	},
 }

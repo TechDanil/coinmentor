@@ -7,9 +7,11 @@ interface Props {
 }
 
 const NewsList = ({ news }: Props) => {
+    console.log(news);
+
     return (
         <ul className="listview">
-            {news.map(news => (
+            {news?.map(news => (
                 <NewsItem key={news.id} news={news} />
             ))}
         </ul>
