@@ -1,13 +1,14 @@
+import { ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 
 const PORTAL_ERROR_MSG = 'Данного элемента на странице, не существует.'
 
-interface IPortal {
-	children: React.ReactNode
+interface Props {
+	children: ReactNode
 	element: Element
 }
 
-const Portal = ({ children, element }: IPortal) => {
+const Portal = ({ children, element }: Props) => {
 	if (!element) throw Error(PORTAL_ERROR_MSG)
 	return createPortal(children, element)
 }
