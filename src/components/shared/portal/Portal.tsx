@@ -5,7 +5,7 @@ const PORTAL_ERROR_MSG = 'Данного элемента на странице,
 
 interface Props {
 	children: ReactNode
-	element: Element
+	element: HTMLElement | null
 }
 
 const Portal = ({ children, element }: Props) => {
