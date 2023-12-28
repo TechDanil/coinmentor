@@ -1,7 +1,7 @@
-import LoginForm from "../../shared/loginForm/LoginForm";
+import LoginForm from '../../shared/loginForm/LoginForm'
 
 const Login = () => {
-    return <LoginForm />;
+	return <LoginForm />
 }
 
-export default Login;
+export default Login

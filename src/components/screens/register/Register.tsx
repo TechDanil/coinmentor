@@ -1,7 +1,7 @@
-import RegisterForm from "../../shared/registerForm/RegisterForm";
+import RegisterForm from '../../shared/registerForm/RegisterForm'
 
 const Register = () => {
-    return <RegisterForm />;
+	return <RegisterForm />
 }
 
-export default Register;
+export default Register

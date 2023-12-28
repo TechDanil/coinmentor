@@ -14,6 +14,7 @@ import {
 	MAIN_SCREEN,
 	REGISTER_SCREEN,
 } from '../configs/screens.config'
+import ProtectedRoute from './helpers/Protected.route'
 
 const AppRouter = () => {
 	return (
@@ -25,8 +26,15 @@ const AppRouter = () => {
 				/>
 				<Route path={`${LOGIN_SCREEN}`} element={<Login />} />
 				<Route path={`${REGISTER_SCREEN}`} element={<Register />} />
-				<Route path={`${ADMIN_SCREEN}`} element={<Layout />}>
-					<Route index element={<Main />} />
+				<Route
+					path={`${ADMIN_SCREEN}`}
+					element={
+						<ProtectedRoute element={<Layout />} path={`${ADMIN_SCREEN}`} />
+					}
+				>
+					<Route element={<Main />}>
+						<Route path='logout' />
+					</Route>
 				</Route>
 			</Routes>
 		</Router>

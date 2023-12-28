@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { IUser } from '../../shared/interfaces/user.interface'
-import { login, register } from './auth.actions'
+import { login, logout, register } from './auth.actions'
 
 interface IInitialState {
 	user: IUser | null
@@ -61,6 +61,14 @@ const AuthSlice = createSlice({
 			console.log(state.user)
 			state.isLoading = false
 			state.isError = true
+			state.isVerified = false
+			state.isAuth = false
+			state.isLicenseAccepted = false
+		})
+		builder.addCase(logout.fulfilled, (state, action) => {
+			state.user = null
+			state.isLoading = false
+			state.isError = false
 			state.isVerified = false
 			state.isAuth = false
 			state.isLicenseAccepted = false
