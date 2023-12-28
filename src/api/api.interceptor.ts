@@ -24,13 +24,16 @@ instance.interceptors.request.use(config => {
 instance.interceptors.response.use(
 	config => config,
 	async error => {
-		const originalRequest = error.config
 		if (
 			error.response.status === 401 &&
 			error.config &&
 			!error.config._isRetry
 		) {
 			error.config._isRetry = true
+			const originalRequest = error.config
+
+			console.log(error)
+			console.log(originalRequest)
 
 			try {
 				const response = await authService.refresh()
@@ -53,4 +56,3 @@ instance.interceptors.response.use(
 )
 
 export { instance }
-
