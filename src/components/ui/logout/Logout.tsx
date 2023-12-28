@@ -12,7 +12,7 @@ const Logout = () => {
 
 	return (
 		<Button onClick={handleLogout}>
-			<Link to={LOGIN_SCREEN} />
+			<Link to={LOGIN_SCREEN}>Logout</Link>
 		</Button>
 	)
 }
