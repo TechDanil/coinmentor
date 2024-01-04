@@ -6,13 +6,13 @@ import { isAuthSelector } from '../../store/auth/auth.selectors'
 
 interface Props {
 	element: ReactNode
-	path: string
+	children?: React.ReactNode
 }
 
-const ProtectedRoute = ({ element, path }: Props) => {
+const ProtectedRoute = ({ element, children, ...rest }: Props) => {
 	const isAuth = useTypedSelector(isAuthSelector)
 	return isAuth ? (
-		<Route path={path} element={element} />
+		<Route {...rest}>{children}</Route>
 	) : (
 		<Navigate to={LOGIN_SCREEN} />
 	)
