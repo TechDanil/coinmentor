@@ -1,21 +1,21 @@
-import { INews } from "../../../../shared/interfaces/news.interface";
+import { INews } from '../../../../shared/interfaces/news.interface'
 // import { newsData } from "./news.data";
-import NewsItem from "./newsItem/NewsItem";
+import NewsItem from './newsItem/NewsItem'
 
 interface Props {
-    news: INews[];
+	news: INews[]
 }
 
 const NewsList = ({ news }: Props) => {
-    console.log(news);
+	console.log(news)
 
-    return (
-        <ul className="listview">
-            {news?.map(news => (
-                <NewsItem key={news.id} news={news} />
-            ))}
-        </ul>
-    )
+	return (
+		<ul className='listview'>
+			{news?.map(news => (
+				<NewsItem key={news.id} news={news} />
+			))}
+		</ul>
+	)
 }
 
-export default NewsList;
+export default NewsList

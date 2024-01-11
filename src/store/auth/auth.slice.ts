@@ -4,6 +4,7 @@ import { login, logout, register } from './auth.actions'
 
 interface IInitialState {
 	user: IUser | null
+	error: string | null
 	isLoading: boolean
 	isError: boolean
 	isVerified: boolean
@@ -14,6 +15,7 @@ interface IInitialState {
 const storedUser = localStorage.getItem('user')
 const initialState: IInitialState = {
 	user: storedUser ? JSON.parse(storedUser) : null,
+	error: null,
 	isLoading: false,
 	isError: false,
 	isVerified: false,
@@ -32,6 +34,7 @@ const AuthSlice = createSlice({
 		})
 		builder.addCase(register.fulfilled, (state, action) => {
 			state.user = action.payload.user
+			state.error = null
 			console.log(state.user)
 			state.isLoading = false
 			state.isError = false
@@ -39,8 +42,10 @@ const AuthSlice = createSlice({
 			state.isAuth = true
 			state.isLicenseAccepted = true
 		})
-		builder.addCase(register.rejected, state => {
+		builder.addCase(register.rejected, (state, action) => {
 			state.user = null
+			state.error = action.payload as string
+			console.log(state.error)
 			state.isLoading = false
 			state.isError = true
 			state.isLicenseAccepted = false
@@ -49,6 +54,7 @@ const AuthSlice = createSlice({
 		})
 		builder.addCase(login.fulfilled, (state, action) => {
 			state.user = action.payload.user
+			state.error = null
 			console.log(state.user)
 			state.isLoading = false
 			state.isError = false
@@ -56,9 +62,10 @@ const AuthSlice = createSlice({
 			state.isAuth = true
 			state.isLicenseAccepted = false
 		})
-		builder.addCase(login.rejected, state => {
+		builder.addCase(login.rejected, (state, action) => {
 			state.user = null
-			console.log(state.user)
+			state.error = action.payload as string
+			console.log(state.error)
 			state.isLoading = false
 			state.isError = true
 			state.isVerified = false

@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
+import { AxiosError } from 'axios'
 import { authService } from '../../services/auth.service'
 import {
 	ILoginRequest,
@@ -24,8 +25,8 @@ export const register = createAsyncThunk<IRegisterResponse, IRegisterRequest>(
 
 			localStorage.setItem('user', JSON.stringify(response.data.user))
 			return response.data
-		} catch (error) {
-			return rejectWithValue(error)
+		} catch (error: any) {
+			return rejectWithValue(error.response.data.message as AxiosError)
 		}
 	}
 )
@@ -47,8 +48,8 @@ export const login = createAsyncThunk<ILoginResponse, ILoginRequest>(
 			}
 
 			return response.data
-		} catch (error) {
-			return rejectWithValue(error)
+		} catch (error: any) {
+			return rejectWithValue(error.response.data.message as AxiosError)
 		}
 	}
 )

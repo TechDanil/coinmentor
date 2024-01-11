@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios'
+import { AxiosError, AxiosResponse } from 'axios'
 import { instance } from '../api/api.interceptor'
 import {
 	ILoginRequest,
@@ -7,6 +7,7 @@ import {
 	IRegisterRequest,
 	IRegisterResponse,
 } from '../shared/interfaces/auth.interface'
+import { handleApiError } from '../utils/handleApiError/handleApiError'
 
 export const authService = {
 	register: async ({
@@ -14,21 +15,33 @@ export const authService = {
 		email,
 		password,
 	}: IRegisterRequest): Promise<AxiosResponse<IRegisterResponse>> => {
-		return instance.post<IRegisterResponse>(
-			`auth/register`,
-			{ username, email, password },
-			{ withCredentials: true }
-		)
+		try {
+			const response = instance.post<IRegisterResponse>(
+				`auth/register`,
+				{ username, email, password },
+				{ withCredentials: true }
+			)
+
+			return response
+		} catch (error) {
+			throw handleApiError(error as AxiosError)
+		}
 	},
 
 	login: async ({
 		email,
 		password,
 	}: ILoginRequest): Promise<AxiosResponse<ILoginResponse>> => {
-		return instance.post<ILoginResponse>(`auth/login`, {
-			email,
-			password,
-		})
+		try {
+			const response = instance.post<ILoginResponse>(`auth/login`, {
+				email,
+				password,
+			})
+
+			return response
+		} catch (error) {
+			throw handleApiError(error as AxiosError)
+		}
 	},
 
 	logout: async (): Promise<AxiosResponse> => {

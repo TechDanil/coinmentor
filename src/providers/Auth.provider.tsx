@@ -1,5 +1,7 @@
+import axios from 'axios'
 import { ReactNode, useEffect } from 'react'
-import { authService } from '../services/auth.service'
+import { API_URL } from '../configs/api.config'
+import { IRefreshResponse } from '../shared/interfaces/auth.interface'
 
 interface Props {
 	children: ReactNode
@@ -10,7 +12,12 @@ const AuthProvider = ({ children }: Props) => {
 		if (localStorage.getItem('token')) {
 			const checkAuth = async () => {
 				try {
-					await authService.refresh()
+					const response = await axios.get<IRefreshResponse>(
+						`${API_URL}auth/refresh`,
+						{ withCredentials: true }
+					)
+
+					localStorage.setItem('token', response.data.accessToken)
 				} catch (error) {
 					throw error
 				}

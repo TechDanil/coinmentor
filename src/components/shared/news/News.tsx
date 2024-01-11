@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { newsService } from '../../../services/news.service'
-import { INewsResponse } from '../../../shared/interfaces/news.interface'
+import { INews } from '../../../shared/interfaces/news.interface'
 import NewsList from './newsList/NewsList'
 
+// const LazyNewsComponent = lazy(() => import('./lazyNews/LazyNews'))
+
 const News = () => {
-	const [news, setNews] = useState<INewsResponse[]>([])
+	const [news, setNews] = useState<INews[]>([])
 
 	useEffect(() => {
 		const fetchData = async () => {
