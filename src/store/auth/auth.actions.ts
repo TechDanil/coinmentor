@@ -15,8 +15,6 @@ export const register = createAsyncThunk<IRegisterResponse, IRegisterRequest>(
 		try {
 			const response = await authService.register(data)
 
-			console.log('Registration Response:', response)
-
 			if (response.data) {
 				const token = response.data.accessToken
 				console.log('Access Token:', token)
@@ -47,6 +45,7 @@ export const login = createAsyncThunk<ILoginResponse, ILoginRequest>(
 				saveToken(token)
 			}
 
+			localStorage.setItem('user', JSON.stringify(response.data.user))
 			return response.data
 		} catch (error: any) {
 			return rejectWithValue(error.response.data.message as AxiosError)
