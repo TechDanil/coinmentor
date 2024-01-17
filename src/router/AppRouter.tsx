@@ -8,8 +8,10 @@ import Layout from '../components/layout/Layout'
 import Login from '../components/screens/login/Login'
 import Main from '../components/screens/main/Main'
 import Register from '../components/screens/register/Register'
+import ConfirmEmail from '../components/shared/confirmEmail/ConfirmEmail'
 import {
 	ADMIN_SCREEN,
+	FORGOT_PASSWORD_SCREEN,
 	LOGIN_SCREEN,
 	MAIN_SCREEN,
 	REGISTER_SCREEN,
@@ -23,6 +25,7 @@ const AppRouter = () => {
 					path={`${MAIN_SCREEN}`}
 					element={<Navigate to={LOGIN_SCREEN} />}
 				/>
+				<Route path={`${FORGOT_PASSWORD_SCREEN}`} element={<ConfirmEmail />} />
 				<Route path={`${LOGIN_SCREEN}`} element={<Login />} />
 				<Route path={`${REGISTER_SCREEN}`} element={<Register />} />
 				<Route path={`${ADMIN_SCREEN}`} element={<Layout />}>

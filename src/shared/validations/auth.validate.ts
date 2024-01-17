@@ -1,4 +1,5 @@
 import { ObjectSchema, boolean, object, string } from 'yup'
+import { IInitialValuesForgot } from '../../components/shared/confirmEmail/initialValues'
 import { IInitialValuesLogin } from '../../components/shared/loginForm/initialValues'
 import { IInitialValuesRegister } from '../../components/shared/registerForm/initialValues'
 
@@ -24,3 +25,10 @@ export const LoginValidationSchema: ObjectSchema<IInitialValuesLogin> = object({
 		.required('Email is required!'),
 	password: string().required('Password is required!'),
 })
+
+export const ForgotPasswordValidationSchema: ObjectSchema<IInitialValuesForgot> =
+	object({
+		email: string()
+			.email('incorrect Email format!')
+			.required('Email is required!'),
+	})
