@@ -17,7 +17,12 @@ const ConfirmEmail = () => {
 			<form className={styles.form}>
 				<div className={styles.form__block}>
 					<ConfirmEmailHeader />
-					<ConfirmEmailBody />
+					<ConfirmEmailBody
+						values={formik.values}
+						errors={formik.errors}
+						touched={formik.touched}
+						isSubmitting={formik.isSubmitting}
+					/>
 				</div>
 			</form>
 		</FormikProvider>

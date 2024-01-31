@@ -7,6 +7,7 @@ import {
 import Layout from '../components/layout/Layout'
 import Login from '../components/screens/login/Login'
 import Main from '../components/screens/main/Main'
+import PasswordRecovery from '../components/screens/passwordRecovery/PasswordRecovery'
 import Register from '../components/screens/register/Register'
 import ConfirmEmail from '../components/shared/confirmEmail/ConfirmEmail'
 import {
@@ -15,6 +16,7 @@ import {
 	LOGIN_SCREEN,
 	MAIN_SCREEN,
 	REGISTER_SCREEN,
+	REST_PASSWORD_SCREEN,
 } from '../configs/screens.config'
 
 const AppRouter = () => {
@@ -24,6 +26,10 @@ const AppRouter = () => {
 				<Route
 					path={`${MAIN_SCREEN}`}
 					element={<Navigate to={LOGIN_SCREEN} />}
+				/>
+				<Route
+					path={`${REST_PASSWORD_SCREEN}`}
+					element={<PasswordRecovery />}
 				/>
 				<Route path={`${FORGOT_PASSWORD_SCREEN}`} element={<ConfirmEmail />} />
 				<Route path={`${LOGIN_SCREEN}`} element={<Login />} />
